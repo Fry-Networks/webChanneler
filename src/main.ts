@@ -1,9 +1,10 @@
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-
+import helmet from 'helmet';
 const port = 3000; // change to your desired port
 
 const server = express();
+server.use(helmet());
 
 server.use((req, res, next) => {
     if (/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(req.hostname)) {
