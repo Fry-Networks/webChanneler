@@ -19,6 +19,7 @@ server.use((req, res, next) => {
         res.status(403).send('Unknown host');
         return;
     }
+    console.log(`channeled ${req.hostname} to ${req.url}`);
     next();
 });
 
