@@ -16,6 +16,8 @@ server.use((req, res, next) => {
         req.url = '/byod' + req.url; // add your app path
     } else if (req.hostname === 'weather.fryfoundation.com') {
         req.url = '/weather' + req.url; // add your app path
+    } else if (req.hostname === 'registration.fryfoundation.com') {
+        req.url = '/registration' + req.url; // add your app path
     } else {
         res.status(403).send('Unknown host');
         return;
@@ -26,6 +28,7 @@ server.use((req, res, next) => {
 
 server.use('/byod', createProxyMiddleware({ target: 'http://localhost:3001', changeOrigin: true }));
 server.use('/weather', createProxyMiddleware({ target: 'http://localhost:3002', changeOrigin: true }));
+server.use('/registration', createProxyMiddleware({ target: 'http://localhost:3007', changeOrigin: true }));
 
 server.listen(port, (err?: unknown) => {
     if (err) throw err;
