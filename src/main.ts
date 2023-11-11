@@ -2,13 +2,15 @@ import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import helmet from 'helmet';
 import path from 'path';
-
+import { fileURLToPath } from 'url';
 const port = 3000; // Change to your desired port
 const server = express();
 
 server.use(helmet());
 
 // Static file serving from ~/phpServer/frycrypto-main/public
+// Construct the path for the public folder
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicFolderPath = path.resolve(__dirname, '../phpServer/frycrypto-main/public');
 server.use(express.static(publicFolderPath));
 
