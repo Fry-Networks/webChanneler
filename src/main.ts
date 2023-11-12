@@ -28,6 +28,7 @@ server.use((req, res, next) => {
     } else if (req.hostname === 'admin.fryfoundation.com') {
         req.url = '/admin' + req.url; // Add your app path
     } else {
+        console.log(`unknown host ${req.hostname}`);
         res.status(403).send('Unknown host');
         return;
     }
