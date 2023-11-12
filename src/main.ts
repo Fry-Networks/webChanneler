@@ -23,15 +23,21 @@ server.use((req, res, next) => {
     if (req.hostname === 'verify.fryfoundation.com' || req.hostname === 'explorer.fryfoundation.com') {
         // Serve static files for these hostnames
         // No URL modification needed, as express.static handles it
+        console.log(`serving ${req.hostname} from ${publicFolderPath}`);
     } else if (req.hostname === 'byod.fryfoundation.com') {
+        console.log(`serving ${req.hostname}`);
         req.url = '/byod' + req.url; // Add your app path
     } else if (req.hostname === 'weather.fryfoundation.com') {
+        console.log(`serving ${req.hostname}`);
         req.url = '/weather' + req.url; // Add your app path
     } else if (req.hostname === 'registration.fryfoundation.com') {
+        console.log(`serving ${req.hostname}`);
         req.url = '/registration' + req.url; // Add your app path
     } else if (req.hostname === 'admin.fryfoundation.com') {
+        console.log(`serving ${req.hostname}`);
         req.url = '/admin' + req.url; // Add your app path
     } else {
+        console.log(`unknown host ${req.hostname}`);
         res.status(403).send('Unknown host');
         return;
     }
