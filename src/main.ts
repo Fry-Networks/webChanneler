@@ -1,25 +1,32 @@
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import helmet from 'helmet';
+import path from 'path';
+import { fileURLToPath } from 'url';
 const port = 3000; // change to your desired port
 
 const server = express();
 server.use(helmet());
-
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const publicFolderPath = path.resolve(__dirname, '../phpServer/frycrypto-main/public');
+server.use(express.static(publicFolderPath));
 server.use((req, res, next) => {
     if (/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(req.hostname)) {
         res.status(403).send('Direct access is not allowed');
         return;
     }
 
-    if (req.hostname === 'byod.fryfoundation.com') {
-        req.url = '/byod' + req.url; // add your app path
+    if (req.hostname === 'verify.fryfoundation.com' || req.hostname === 'explorer.fryfoundation.com') {
+        // Serve static files for these hostnames
+        // No URL modification needed, as express.static handles it
+    } else if (req.hostname === 'byod.fryfoundation.com') {
+        req.url = '/byod' + req.url; // Add your app path
     } else if (req.hostname === 'weather.fryfoundation.com') {
-        req.url = '/weather' + req.url; // add your app path
+        req.url = '/weather' + req.url; // Add your app path
     } else if (req.hostname === 'registration.fryfoundation.com') {
-        req.url = '/registration' + req.url; // add your app path
+        req.url = '/registration' + req.url; // Add your app path
     } else if (req.hostname === 'admin.fryfoundation.com') {
-        req.url = '/admin' + req.url; // add your app path
+        req.url = '/admin' + req.url; // Add your app path
     } else {
         res.status(403).send('Unknown host');
         return;
