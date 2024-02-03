@@ -16,7 +16,7 @@ server.use((req, res, next) => {
         return;
     }
 
-    if (req.hostname === 'verify.fryfoundation.com' || req.hostname === 'explorer.fryfoundation.com') {
+    if (req.hostname === 'verify.fryfoundation.com' || req.hostname === 'explorer.fryfoundation.com' || req.hostname === 'dashboard.fryfoundation.com') {
         // Serve static files for these hostnames
         // No URL modification needed, as express.static handles it
     } else if (req.hostname === 'byod.fryfoundation.com') {
