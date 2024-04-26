@@ -31,6 +31,9 @@ server.use((req, res, next) => {
         req.url = '/air' + req.url; // Add your app path
     }else if (req.hostname === 'api.fryfoundation.com') {
         req.url = '/api' + req.url; // Add your app path
+    } else if (req.hostname === 'dao.fryfoundation.com') {
+        req.url = '/dao' + req.url; // Add your app path
+    
     } else {
         console.log(`unknown host ${req.hostname}`);
         res.status(403).send('Unknown host');
@@ -46,7 +49,7 @@ server.use('/registration', createProxyMiddleware({ target: 'http://localhost:30
 server.use('/admin', createProxyMiddleware({ target: 'http://localhost:3008', changeOrigin: true }));
 server.use('/air', createProxyMiddleware({ target: 'http://localhost:3010', changeOrigin: true }));
 server.use('/api', createProxyMiddleware({ target: 'http://localhost:3011', changeOrigin: true }));
-
+server.use('/dao', createProxyMiddleware({ target: 'http://localhost:3012', changeOrigin: true }));
 server.listen(port, (err?: unknown) => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);
