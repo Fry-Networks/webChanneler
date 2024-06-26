@@ -16,33 +16,35 @@ server.use((req, res, next) => {
         return;
     }
 
-    if (req.hostname === 'verify.fryfoundation.com' || req.hostname === 'explorer.fryfoundation.com' || req.hostname === 'dashboard.fryfoundation.com') {
-        // Serve static files for these hostnames
-        // No URL modification needed, as express.static handles it
-    } else if (req.hostname === 'byod.fryfoundation.com') {
-        req.url = '/byod' + req.url; // Add your app path
-    } else if (req.hostname === 'weather.fryfoundation.com') {
-        req.url = '/weather' + req.url; // Add your app path
-    } else if (req.hostname === 'registration.fryfoundation.com') {
-        req.url = '/registration' + req.url; // Add your app path
-    } else if (req.hostname === 'admin.fryfoundation.com') {
-        req.url = '/admin' + req.url; // Add your app path
-    }else if (req.hostname === 'air.fryfoundation.com') {
-        req.url = '/air' + req.url; // Add your app path
-    }else if (req.hostname === 'api.fryfoundation.com') {
-        req.url = '/api' + req.url; // Add your app path
-    } else if (req.hostname === 'dao.fryfoundation.com') {
-        req.url = '/dao' + req.url; // Add your app path
-    } else if (req.hostname === 'water.fryfoundation.com') {
-        req.url = '/water' + req.url; // Add your app path
-    }
-    else if (req.hostname === 'energy.fryfoundation.com') {
-        req.url = '/energy' + req.url; // Add your app path
-    } else {
-        console.log(`unknown host ${req.hostname}`);
-        res.status(403).send('Unknown host');
-        return;
-    }
+    if (['verify.fryfoundation.com', 'verify.frynetworks.com',
+        'explorer.fryfoundation.com', 'explorer.frynetworks.com',
+        'dashboard.fryfoundation.com', 'dashboard.frynetworks.com'].includes(req.hostname)) {
+       // Serve static files for these hostnames
+       // No URL modification needed, as express.static handles it
+   } else if (['byod.fryfoundation.com', 'byod.frynetworks.com'].includes(req.hostname)) {
+       req.url = '/byod' + req.url; // Add your app path
+   } else if (['weather.fryfoundation.com', 'weather.frynetworks.com'].includes(req.hostname)) {
+       req.url = '/weather' + req.url; // Add your app path
+   } else if (['registration.fryfoundation.com', 'registration.frynetworks.com'].includes(req.hostname)) {
+       req.url = '/registration' + req.url; // Add your app path
+   } else if (['admin.fryfoundation.com', 'admin.frynetworks.com'].includes(req.hostname)) {
+       req.url = '/admin' + req.url; // Add your app path
+   } else if (['air.fryfoundation.com', 'air.frynetworks.com'].includes(req.hostname)) {
+       req.url = '/air' + req.url; // Add your app path
+   } else if (['api.fryfoundation.com', 'api.frynetworks.com'].includes(req.hostname)) {
+       req.url = '/api' + req.url; // Add your app path
+   } else if (['dao.fryfoundation.com', 'dao.frynetworks.com'].includes(req.hostname)) {
+       req.url = '/dao' + req.url; // Add your app path
+   } else if (['water.fryfoundation.com', 'water.frynetworks.com'].includes(req.hostname)) {
+       req.url = '/water' + req.url; // Add your app path
+   } else if (['energy.fryfoundation.com', 'energy.frynetworks.com'].includes(req.hostname)) {
+       req.url = '/energy' + req.url; // Add your app path
+   } else {
+       console.log(`Unknown host ${req.hostname}`);
+       res.status(403).send('Unknown host');
+       return;
+   }
+   
     console.log(`channeled ${req.hostname} to ${req.url}`);
     next();
 });
