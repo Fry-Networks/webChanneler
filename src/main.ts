@@ -33,7 +33,7 @@ server.use((req, res, next) => {
        req.url = '/air' + req.url; // Add your app path
    } else if (['api.fryfoundation.com', 'api.frynetworks.com'].includes(req.hostname)) {
        req.url = '/api' + req.url; // Add your app path
-   } else if (['dao.fryfoundation.com', 'dao.frynetworks.com'].includes(req.hostname)) {
+   } else if (['dao.fryfoundation.com', 'dao.frynetworks.com', 'vote.frynetworks.com', 'vote.fryfoundation.com'].includes(req.hostname)) {
        req.url = '/dao' + req.url; // Add your app path
    } else if (['water.fryfoundation.com', 'water.frynetworks.com'].includes(req.hostname)) {
        req.url = '/water' + req.url; // Add your app path
