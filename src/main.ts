@@ -33,8 +33,8 @@ server.use((req, res, next) => {
        req.url = '/air' + req.url; // Add your app path
    } else if (['api.fryfoundation.com', 'api.frynetworks.com'].includes(req.hostname)) {
        req.url = '/api' + req.url; // Add your app path
-   } else if (['dao.fryfoundation.com', 'dao.frynetworks.com', 'vote.frynetworks.com', 'vote.fryfoundation.com'].includes(req.hostname)) {
-       req.url = '/dao' + req.url; // Add your app path
+   } else if (['vote.fryfoundation.com', 'vote.frynetworks.com', ].includes(req.hostname)) {
+       req.url = '/vote' + req.url; // Add your app path
    } else if (['water.fryfoundation.com', 'water.frynetworks.com'].includes(req.hostname)) {
        req.url = '/water' + req.url; // Add your app path
    } else if (['energy.fryfoundation.com', 'energy.frynetworks.com'].includes(req.hostname)) {
@@ -55,7 +55,7 @@ server.use('/registration', createProxyMiddleware({ target: 'http://localhost:30
 server.use('/admin', createProxyMiddleware({ target: 'http://localhost:3008', changeOrigin: true }));
 server.use('/air', createProxyMiddleware({ target: 'http://localhost:3010', changeOrigin: true }));
 server.use('/api', createProxyMiddleware({ target: 'http://localhost:3011', changeOrigin: true }));
-server.use('/dao', createProxyMiddleware({ target: 'http://localhost:3012', changeOrigin: true }));
+server.use('/vote', createProxyMiddleware({ target: 'http://localhost:3012', changeOrigin: true }));
 server.use('/water', createProxyMiddleware({ target: 'http://localhost:3013', changeOrigin: true }));
 server.use('/energy', createProxyMiddleware({ target: 'http://localhost:3015', changeOrigin: true }));
 
