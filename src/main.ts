@@ -17,7 +17,6 @@ server.use((req, res, next) => {
     }
 
     if (['verify.fryfoundation.com', 'verify.frynetworks.com',
-        'explorer.fryfoundation.com', 'explorer.frynetworks.com',
         'dashboard.fryfoundation.com', 'dashboard.frynetworks.com'].includes(req.hostname)) {
        // Serve static files for these hostnames
        // No URL modification needed, as express.static handles it
@@ -39,6 +38,9 @@ server.use((req, res, next) => {
        req.url = '/water' + req.url; // Add your app path
    } else if (['energy.fryfoundation.com', 'energy.frynetworks.com'].includes(req.hostname)) {
        req.url = '/energy' + req.url; // Add your app path
+   } else if (req.hostname === "explorer.frynetworks.com") {
+       req.url = '/explorer' + req.url;
+
    } else {
        console.log(`Unknown host ${req.hostname}`);
        res.status(403).send('Unknown host');
@@ -58,6 +60,7 @@ server.use('/api', createProxyMiddleware({ target: 'http://localhost:3011', chan
 server.use('/vote', createProxyMiddleware({ target: 'http://localhost:3012', changeOrigin: true }));
 server.use('/water', createProxyMiddleware({ target: 'http://localhost:3013', changeOrigin: true }));
 server.use('/energy', createProxyMiddleware({ target: 'http://localhost:3015', changeOrigin: true }));
+server.use('/explorer', createProxyMiddleware({ target: 'http://localhost:3019', changeOrigin: true }));
 
 server.listen(port, (err?: unknown) => {
     if (err) throw err;
