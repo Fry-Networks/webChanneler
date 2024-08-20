@@ -24,7 +24,7 @@ server.use((req, res, next) => {
         req.url = '/byod' + req.url; // Add your app path
     } else if (['weather.fryfoundation.com', 'weather.frynetworks.com'].includes(req.hostname)) {
         req.url = '/weather' + req.url; // Add your app path
-    } else if (['registration.fryfoundation.com', 'registration.frynetworks.com'].includes(req.hostname)) {
+    } else if (['registration.fryfoundation.com', 'registration.frynetworks.com', 'register.frynetworks.com'].includes(req.hostname)) {
         req.url = '/registration' + req.url; // Add your app path
     } else if (['admin.fryfoundation.com', 'admin.frynetworks.com'].includes(req.hostname)) {
         req.url = '/admin' + req.url; // Add your app path
