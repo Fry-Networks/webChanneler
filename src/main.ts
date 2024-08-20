@@ -38,7 +38,7 @@ server.use((req, res, next) => {
         req.url = '/water' + req.url; // Add your app path
     } else if (['energy.fryfoundation.com', 'energy.frynetworks.com'].includes(req.hostname)) {
         req.url = '/energy' + req.url; // Add your app path
-    } else if (req.hostname === "explorer.frynetworks.com") {
+    } else if ([ 'explorer.fryfoundation.com', 'explorer.frynetworks.com'].includes(req.hostname)) {
         req.url = '/explorer' + req.url;
     } else if (req.hostname === "tiles.frynetworks.com") {
         req.url = '/tiles' + req.url;
